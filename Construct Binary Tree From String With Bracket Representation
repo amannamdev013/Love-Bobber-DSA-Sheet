@@ -1,0 +1,51 @@
+Node *treeFromString(string s)
+    {
+       if(s.size()==0)
+       return NULL;
+       stack<Node*>st;
+       int n=s.size();
+       for(int i=0;i<n;i++){
+           if(s[i]=='(')
+           {
+               st.push(NULL);
+           }
+           else if(s[i]==')')
+           {
+               Node* temp=NULL;
+              if(st.size()>0)
+              {
+                  temp=st.top();
+                  st.pop();
+                  
+              }
+              if(st.size()>0&&st.top()==NULL)
+              st.pop();
+              if(st.size()>0&&st.top()!=NULL)
+               {
+                   if(!st.top()->left) st.top()->left=temp;
+                   else st.top()->right=temp;
+                   
+               }               
+           }
+           else {
+               bool neg=false;
+               if(s[i]=='-'){
+                   i++;
+                   neg=true;
+               }
+               int temp=0;
+               while(isdigit(s[i]))
+               {
+                temp=temp*10+(s[i]-'0');  
+                i++;
+               }
+               if(neg)
+               temp=-temp;
+               Node* root=new Node(temp);
+               st.push(root);
+               i--;
+           }
+       }
+       if(st.size()>0) return st.top();
+       else return NULL;
+    }
