@@ -1,0 +1,26 @@
+ Node* head=NULL;
+    Node* last=NULL;
+    void solve(Node* root)
+    {
+        if(root==NULL) return;
+        if(root->left==NULL && head==NULL) head=root;
+        solve(root->left);
+        if(last!=NULL)
+        {
+            root->left=last;
+            last->right=root;
+        }
+        last=root;
+        solve(root->right);
+    }
+    
+    
+    
+    //Function to convert binary tree to doubly linked list and return it.
+    Node * bToDLL(Node *root)
+    {
+        
+        solve(root);
+        return head;
+       
+    }
