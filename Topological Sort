@@ -1,0 +1,26 @@
+Directed Acyclic Graph (DAG) with V vertices and E edges, Find any Topological Sorting of that Graph.
+	vector<int>ans;
+	void solve(int vis[],int i,vector<int> adj[])
+	{
+	    vis[i]=true;
+	    for(auto it:adj[i])
+	    {
+	        if(vis[it]==false)
+	        solve(vis,it,adj);
+	    }
+	    ans.push_back(i);
+	}
+	//Function to return list containing vertices in Topological order. 
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    int vis[V]={false};
+	    for(int i=0;i<V;i++)
+	    {
+	        if(vis[i]==false)
+	        {
+	            solve(vis,i,adj);
+	        }
+	    }
+	    reverse(ans.begin(),ans.end());
+	    return ans;
+	}
