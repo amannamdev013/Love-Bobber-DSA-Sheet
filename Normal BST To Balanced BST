@@ -1,0 +1,36 @@
+Time Complexity: O(n)
+Spce Complexity: O(n)
+
+void helper(Node* root,vector<int>& v)
+{
+    if(root==NULL) return ;
+    helper(root->left,v);
+    v.push_back(root->data);
+    helper(root->right,v);
+    return;
+}
+
+
+Node* solve(int start,int end,vector<int>& v)
+{
+    if(start>end)
+    return NULL;
+    
+    int mid=(start+end)/2;
+    Node* root=new Node(v[mid]);
+    if(start==end) return root;
+    root->left=solve(start,mid-1,v);
+    root->right=solve(mid+1,end,v);
+    return root;
+}
+
+
+Node* buildBalancedTree(Node* root)
+{
+ if(root==NULL) return root;
+ vector<int>v;
+ helper(root,v);
+ int start=0,end=v.size()-1;
+ return solve(start,end,v);
+ 
+}
