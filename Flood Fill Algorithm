@@ -1,0 +1,29 @@
+Space Complexity: O(n*m)+recursion stack space
+Time Complexity: O(n*m)
+
+void solve(int sr,int sc,int x,int newcolor, vector<vector<bool>>& vis,vector<vector<int>>& image,int n,int m)
+{
+    if(sr==n||sc==m) return ;
+    image[sr][sc]=newcolor;
+    vis[sr][sc]=true;
+    if(sr!=0 && vis[sr-1][sc]==false && image[sr-1][sc]==x)
+    solve(sr-1,sc,x,newcolor,vis,image,n,m);
+    if(sr!=n-1 && vis[sr+1][sc]==false && image[sr+1][sc]==x)
+    solve(sr+1,sc,x,newcolor,vis,image,n,m);
+    if(sc!=0 && vis[sr][sc-1]==false && image[sr][sc-1]==x)
+    solve(sr,sc-1,x,newcolor,vis,image,n,m);
+    if(sc!=m-1 && vis[sr][sc+1]==false && image[sr][sc+1]==x)
+    solve(sr,sc+1,x,newcolor,vis,image,n,m);
+    return ;
+    
+    
+}
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+    int n=image.size(),m=image[0].size(),x=image[sr][sc];
+     vector<vector<bool>>vis(n,vector<bool>(m,false));
+    
+    solve(sr,sc,x,newColor,vis,image,n,m);
+    return image;
+    }
+    // we can do it by queue also by making a visited array , we will check that elements connected to current element in four directions is not visited and value 
+    // of those connected elements are the same to which we have to replace than we enqueue that elements and mark them as visited and replace the new value to current posiont value. 
