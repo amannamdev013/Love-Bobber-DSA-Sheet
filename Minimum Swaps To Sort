@@ -1,0 +1,26 @@
+Space:	O(n)
+Time:   O(nlogn)
+  int minSwaps(vector<int>&nums)
+	{
+	    unordered_map<int,int>mp;
+	    vector<int>v;
+	    for(int i=0;i<nums.size();i++)
+	    {
+	        mp[nums[i]]=i;
+	        v.push_back(nums[i]);
+	    }
+	    sort(v.begin(),v.end());
+	    int ans=0,second;
+	    for(int i=0;i<nums.size();i++)
+	    {
+	        if(nums[i]!=v[i])
+	      { second=mp[v[i]];
+	       nums[second]=nums[i];
+	       mp[nums[second]]=second;
+	       nums[i]=v[i];
+	       mp[nums[i]]=i;
+	          ans++;
+	      }
+	    }
+	    return ans;
+	}
