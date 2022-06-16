@@ -24,3 +24,4 @@ Time:   O(nlogn)
 	    }
 	    return ans;
 	}
+// we can use this by making a graph and count total number of cycle or connected components and sum of their (length-1).
