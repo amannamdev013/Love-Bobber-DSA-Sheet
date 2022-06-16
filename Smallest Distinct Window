@@ -1,0 +1,42 @@
+ int findSubString(string str)
+    {
+       int n=str.size();
+       if(n==1) return 1;
+       char arr[256]={0};
+       for(int i=0;i<n;i++)
+       {
+           arr[str[i]-'0']=1;
+       }
+       int m=0;
+for(int i=0;i<256;i++)
+{
+    if(arr[i]==1) m++;
+ }
+ unordered_map<char,int>mp;
+ int first=0;
+ int current=1,count=1;
+ mp[str[0]]++;
+ int ans=INT_MAX;
+ 
+ while(current<n)
+ {
+     mp[str[current]]++;
+     count++;
+     if(mp.size()==m) ans=min(ans,count);
+     if(str[current]==str[first])
+     {
+         while(current>first && mp[str[first]]>1)
+         {
+            
+            mp[str[first]]--;
+            count--;
+            if(mp.size()==m) ans=min(ans,count);
+            first++;
+            
+         }
+     }
+     current++;
+     if(ans==m) return m;
+ }
+ return ans; 
+ }
