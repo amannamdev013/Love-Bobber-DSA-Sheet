@@ -1,0 +1,23 @@
+Space: O(1)
+Time: O(N)
+
+ int maxEqualSum(int N1,int N2,int N3,vector<int> &S1,vector<int> &S2,vector<int> &S3){
+        int x=0,y=0,z=0;
+        for(int i=0;i<N1;i++)
+        x+=S1[i];
+        for(int i=0;i<N2;i++)
+        y+=S2[i];
+        for(int i=0;i<N3;i++)
+        z+=S3[i];
+        int i=0,j=0,k=0;
+        if(x==y && x==z) return x;
+        while(i<N1 && j<N2 && k<N3)
+        {
+           if(x>=y && x>=z)
+           x-=S1[i++];
+           else if(y>=x && y>=z) y-=S2[j++];
+           else if(z>=x && z>=y) z-=S3[k++];
+           if(x==y && x==z) return x;
+        }
+        return 0;
+    }
