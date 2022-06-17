@@ -25,3 +25,32 @@ vector <int> bottomView(Node *root) {
     return ans;
     }
     // we can use it by unordered_map also by maintaining min_distance and max_distance pointer.
+
+
+    vector <int> bottomView(Node *root) {
+    if(root==NULL) return {};
+    unordered_map<int,int>mp;
+    queue<pair<int,Node*>>q;
+    q.push({0,root});
+    int mn=0,mx=0;
+    while(!q.empty())
+    {
+        pair<int,Node*>p1=q.front();
+        q.pop();
+        mp[p1.first]=p1.second->data;
+        Node* temp=p1.second;
+        int x=p1.first;
+        mn=min(mn,x);
+        mx=max(mx,x);
+        if(temp->left)
+        {
+            q.push({x-1,temp->left});
+        }
+        if(temp->right)
+        q.push({x+1,temp->right});
+    }
+    vector<int>ans;
+    for(int i=mn;i<=mx;i++)
+    ans.push_back(mp[i]);
+    return ans;
+    }
