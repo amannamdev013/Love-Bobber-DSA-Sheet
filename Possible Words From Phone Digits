@@ -1,0 +1,27 @@
+Space: O(N)
+Time: O(4^N * N)
+
+void solve(int a[],int i,int n,string arr[],vector<string>& ans,string &op)
+    {
+        if(i==n) {
+            ans.push_back(op);
+            return;
+        }
+        string temp=arr[a[i]];
+        for(int j=0;j<temp.size();j++)
+        {
+            op.push_back(temp[j]);
+            solve(a,i+1,n,arr,ans,op);
+            op.pop_back();
+        }
+    }
+    
+    vector<string> possibleWords(int a[], int N)
+    {
+     int i=0;
+     string op="";
+     string arr[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+     vector<string>ans;
+     solve(a,i,N,arr,ans,op);
+     return ans;
+    }
