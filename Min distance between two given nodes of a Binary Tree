@@ -1,0 +1,48 @@
+Space: O(H)
+Time: O(N)
+
+void solve(Node* lca,int a,int &h,int &first)
+    {
+        if(lca==NULL)
+        return ;
+     
+        if(lca->data==a)
+        {
+        first=h;
+        return;
+        }
+        h++;
+        solve(lca->left,a,h,first);
+        solve(lca->right,a,h,first);
+        h--;
+        return ;
+    }
+    
+    
+    
+   Node* Lca(Node* root,int a,int b)
+   {
+       if(root==NULL) return root;
+       if(root->data==a || root->data==b)
+       return root;
+       Node* left=Lca(root->left,a,b);
+       Node* right=Lca(root->right,a,b);
+       if(left!=NULL && right!=NULL) return root;
+       if(left==NULL) return right;
+       else return left;
+   }
+   
+    int findDist(Node* root, int a, int b) {
+        Node* lca=Lca(root,a,b);
+        if(lca==NULL) return -1;
+        int h=0;
+        int first=0;
+        int second=0;
+        solve(lca,a,h,first);
+  
+        h=0;
+        solve(lca,b,h,second);
+  
+        return first+second;
+        
+    }
