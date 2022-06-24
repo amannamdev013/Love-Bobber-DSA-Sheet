@@ -1,0 +1,31 @@
+Space: O(N)
+Time: O(N)
+
+int maxProfit(vector<int>&price){
+    int n=price.size();
+   int arr[n];
+   arr[n-1]=0;
+   int ma=price[n-1],curr=0;
+   
+   for(int i=n-2;i>=0;--i)
+   {
+       ma=max(price[i],ma);
+       curr=max(curr,ma-price[i]);
+       arr[i]=curr;
+       
+   }
+  
+   int mn=price[0];
+   curr=-1;
+   int ans=arr[0];
+   for(int i=1;i<=n-1;i++)
+   {
+       mn=min(price[i],mn);
+       curr=max(curr,price[i]-mn);
+       arr[i]+=curr;
+       ans=max(ans,arr[i]);
+   }
+   
+   return ans;
+   
+}
